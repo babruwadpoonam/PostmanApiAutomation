@@ -1,0 +1,182 @@
+{
+	"id": "9ad9a057-1b36-4735-8c0f-c941a4dcc090",
+	"name": "TestingOnReqres",
+	"timestamp": "2023-07-04T10:39:41.853Z",
+	"collection_id": "28323265-88efc222-b39d-473d-8c66-66b66ac985a3",
+	"folder_id": 0,
+	"environment_id": "28323265-f3a2215b-233f-424a-b7c7-8eccd5e6dba8",
+	"totalPass": 10,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-07-04T10:39:39.033Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "5be2c91f-6617-46ea-b2bc-3db6393849d7",
+			"name": "CreateUser",
+			"url": "https://reqres.in/api/users",
+			"time": 574,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Successful POST request": true,
+				"Body matches string": true,
+				"Validate the Json Schema": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Body matches string": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Validate the Json Schema": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				574
+			],
+			"allTests": [
+				{
+					"Successful POST request": true,
+					"Body matches string": true,
+					"Validate the Json Schema": true
+				}
+			]
+		},
+		{
+			"id": "466cddb1-ffaa-4fd1-bf49-db72e32ac5a8",
+			"name": "GetListOfUsers",
+			"url": "https://reqres.in/api/users?page=2",
+			"time": 64,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response time is less than 200ms": true,
+				"Body matches string": true,
+				"Validate the username are correct": true,
+				"Validate the job description is correct": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 200ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Body matches string": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Validate the username are correct": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Validate the job description is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				64
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response time is less than 200ms": true,
+					"Body matches string": true,
+					"Validate the username are correct": true,
+					"Validate the job description is correct": true
+				}
+			]
+		},
+		{
+			"id": "1d7f5866-a7d0-463f-9cf6-c2ccdd8148f3",
+			"name": "UpdateUser",
+			"url": "https://reqres.in/api/users/885",
+			"time": 437,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				437
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "182aaa66-585f-42cb-a9b0-20de4233df52",
+			"name": "GetListOfUsersError",
+			"url": "https://reqres.in/random",
+			"time": 394,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				394
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 1469,
+	"collection": {
+		"requests": [
+			{
+				"id": "5be2c91f-6617-46ea-b2bc-3db6393849d7",
+				"method": "POST"
+			},
+			{
+				"id": "466cddb1-ffaa-4fd1-bf49-db72e32ac5a8",
+				"method": "GET"
+			},
+			{
+				"id": "1d7f5866-a7d0-463f-9cf6-c2ccdd8148f3",
+				"method": "PUT"
+			},
+			{
+				"id": "182aaa66-585f-42cb-a9b0-20de4233df52",
+				"method": "GET"
+			}
+		]
+	}
+}
