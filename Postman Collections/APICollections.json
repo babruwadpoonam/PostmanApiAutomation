@@ -1,0 +1,274 @@
+{
+	"info": {
+		"_postman_id": "88efc222-b39d-473d-8c66-66b66ac985a3",
+		"name": "TestingOnReqres",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3554ad7b-7b1d-40ed-97cb-ba7b287c3d4e",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"leader\");\r",
+							"});\r",
+							"const schema = {\r",
+							"            \"type\": \"object\",\r",
+							"            \"additionalProperties\": false,\r",
+							"            \"properties\": {\r",
+							"                \"name\": {\r",
+							"                    \"type\": \"string\"\r",
+							"                },\r",
+							"                \"job\": {\r",
+							"                    \"type\": \"string\"\r",
+							"                },\r",
+							"                \"id\": {\r",
+							"                    \"type\": \"string\"\r",
+							"                },\r",
+							"                \"createdAt\": {\r",
+							"                    \"type\": \"string\",\r",
+							"                    \"format\": \"date-time\"\r",
+							"                }\r",
+							"            },\r",
+							"            \"required\": [\r",
+							"                \"createdAt\",\r",
+							"                \"id\",\r",
+							"                \"job\",\r",
+							"                \"name\"\r",
+							"            ]\r",
+							"        };\r",
+							"\r",
+							"\r",
+							"pm.test(\"Validate the Json Schema\",\r",
+							"function(){\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(\"GetListOfUsers\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "5be2c91f-6617-46ea-b2bc-3db6393849d7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{$randomFirstName}}\",\r\n    \"job\": \"leader\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}api/users"
+			},
+			"response": []
+		},
+		{
+			"name": "GetListOfUsers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fc5c60c9-f9e8-4141-ac91-fa517257b7f4",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"michael.lawson@reqres.in\");\r",
+							"});\r",
+							"const jsonData =  pm.response.json(); \r",
+							"pm.test(\"Validate the username are correct\",\r",
+							"function(){\r",
+							"    pm.expect(pm.collectionVariables.get(\"first_name\")).to.include(jsonData.data[0].first_name);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate the job description is correct\", \r",
+							"function(){\r",
+							"    pm.expect(pm.collectionVariables.get(\"last_name\")).to.eql(jsonData.data[0].last_name);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "466cddb1-ffaa-4fd1-bf49-db72e32ac5a8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}api/users?page=2",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetListOfUsersError",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fc5c60c9-f9e8-4141-ac91-fa517257b7f4",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "182aaa66-585f-42cb-a9b0-20de4233df52",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}random"
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "87fad701-f9d9-472f-8639-f79f5fbb6315",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "1d7f5866-a7d0-463f-9cf6-c2ccdd8148f3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{updated_userName}}\",\r\n    \"job\": \"{{job}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}api/users/{{$randomInt}}"
+			},
+			"response": [
+				{
+					"id": "17510bea-09e4-4c90-a79c-daa44a94da7d",
+					"name": "UpdateUser",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jason\",\r\n    \"job\": \"zion resident\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://reqres.in/api/users/1"
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"responseTime": null,
+					"body": "{\r\n    \"name\": \"Jason\",\r\n    \"job\": \"zion resident\",\r\n    \"updatedAt\": \"2022-11-15T05:41:35.558Z\"\r\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "eeaf393f-dacd-4fd3-b2dd-9e906c294f51",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "0a53f181-eb96-4f61-96de-322fc48fdb54",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "90d631d1-165c-4170-acb0-7e4810993f02",
+			"key": "first_name",
+			"value": "Michael",
+			"type": "string"
+		},
+		{
+			"id": "1607f2c9-99bf-455e-a833-2941ec108488",
+			"key": "last_name",
+			"value": "Lawson",
+			"type": "string"
+		},
+		{
+			"id": "f6da70bf-7625-45e1-9b99-a602b4188705",
+			"key": "updated_userName",
+			"value": "PostmanTest",
+			"type": "string"
+		},
+		{
+			"id": "ea670168-34f7-486f-81f5-b6c8df0260af",
+			"key": "job",
+			"value": "testing",
+			"type": "string"
+		}
+	]
+}
